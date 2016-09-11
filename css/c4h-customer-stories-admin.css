@@ -1,0 +1,39 @@
+/**
+ * All of the CSS for your admin-specific functionality should be
+ * included in this file.
+ */
+.cs-admin-map img {
+  max-width: 80%;
+  margin: 0 auto;
+  display: block; }
+
+.cmb2-id--c4h-cs-grid .postbox .inside {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: row;
+      flex-direction: row;
+  -ms-flex-wrap: nowrap;
+      flex-wrap: nowrap;
+  -ms-flex-pack: center;
+      justify-content: center;
+  -ms-flex-align: stretch;
+      align-items: stretch;
+  -ms-flex-line-pack: stretch;
+      align-content: stretch; }
+
+#_c4h_cs_grid_repeat .cmb-row {
+  border: 0px; }
+
+.cmb2-id--c4h-cs-grid .postbox .inside .cmb-row {
+  padding: 0 1em 1.8em; }
+
+.cmb2-id--c4h-cs-grid .postbox .inside .cmb-row .cmb-th,
+.cmb2-id--c4h-cs-grid .postbox .inside .cmb-row .cmb-td {
+  float: none;
+  width: auto; }
+
+.cmb2-id--c4h-cs-grid .cmb-group-title,
+.cmb2-id--c4h-cs-grid .cmbhandle {
+  display: none; }
+
+/*# sourceMappingURL=css/c4h-customer-stories-admin.css.map */

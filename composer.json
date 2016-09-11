@@ -1,0 +1,16 @@
+{
+    "name": "zenio/c4h-customer-stories",
+    "description": "WordPress plugin to display customer stories on a CO map",
+    "type": "project",
+    "require-dev": {
+        "phpmd/phpmd": "^2.4",
+        "wp-coding-standards/wpcs": "^0.9.0"
+    },
+    "authors": [
+        {
+            "name": "Chris Smith",
+            "email": "chris@teamzen.io"
+        }
+    ],
+    "require": {}
+}
