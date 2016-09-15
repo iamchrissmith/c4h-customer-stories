@@ -2,10 +2,43 @@
  * All of the CSS for your admin-specific functionality should be
  * included in this file.
  */
-.cs-admin-map img {
-  max-width: 80%;
-  margin: 0 auto;
-  display: block; }
+/*!
+* Global Stylesheet for C4HCO Customer Stories
+* These styles are loaded for both public and admin views
+*/
+.cs-map {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: row;
+      flex-direction: row;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  width: 100%;
+  max-width: 932px;
+  max-height: 694px;
+  background-size: contain;
+  background-repeat: no-repeat; }
+
+.cs-map-item {
+  width: calc(100%/22);
+  height: calc(100%/18);
+  margin: 0;
+  padding: 0;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-align: center;
+      align-items: center;
+  -ms-flex-pack: distribute;
+      justify-content: space-around; }
+
+.cs-admin-map {
+  height: calc(752px*694/932); }
+  .cs-admin-map .cs-map-item__inactive {
+    background: rgba(0, 0, 0, 0.3); }
+  .cs-admin-map .cs-map-item__occupied {
+    background: rgba(255, 255, 255, 0.3); }
 
 .cmb2-id--c4h-cs-grid .postbox .inside {
   display: -ms-flexbox;
@@ -35,5 +68,14 @@
 .cmb2-id--c4h-cs-grid .cmb-group-title,
 .cmb2-id--c4h-cs-grid .cmbhandle {
   display: none; }
+
+.cs-map-item {
+  -ms-flex-align: start;
+      -ms-grid-row-align: flex-start;
+      align-items: flex-start;
+  -ms-flex-pack: start;
+      justify-content: flex-start;
+  border: 1px solid black;
+  box-sizing: border-box; }
 
 /*# sourceMappingURL=css/c4h-customer-stories-admin.css.map */

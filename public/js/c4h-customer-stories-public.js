@@ -29,4 +29,19 @@
 	 * practising this, we should strive to set a better example in our own work.
 	 */
 
+	$( window ).load(function() {
+        $(".cs-map-thumbnail").colorbox({
+            inline:true,
+            width:"75%",
+            opacity:"0",
+            closeButton:false,
+            className: "cs-colorbox",
+            scrolling:false,
+            maxWidth:'745px'
+        });
+        $('.cs-list-item .cboxClose').on('click', function() {
+            $.colorbox.close();
+        });
+    });
+
 })( jQuery );

@@ -171,6 +171,9 @@ class C4h_Customer_Stories {
         
         $this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
         $this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
+	    $this->loader->add_action( 'init', $plugin_public, 'include_shortcode' );
+	    
+	    
         
     }
     
@@ -215,21 +218,100 @@ class C4h_Customer_Stories {
     }
 	
 	/**
-	 * Display the map for the admin
 	 *
-	 * @param   $view   string 'admin' or 'public'
+	 * Runs WP_Query to get our published stories
+	 *
+	 * @return WP_Query $stories
+	 */
+	public static function get_stories() {
+    	$args = array(
+    	    'post_type' => 'customer-story',
+		    'posts_per_page' => -1,
+	        'post_status'     => 'publish',
+	    );
+	    
+	    $stories = new WP_Query( $args );
+	    wp_reset_postdata();
+		$post_count = 0;
+		if ( $stories->have_posts() ) : while ( $stories->have_posts() ) : $stories->the_post();
+			
+			$story_id = get_the_ID();
+			$story_meta = get_post_meta( $story_id );
+			
+			$stories->posts[$post_count]->meta = $story_meta;
+		
+			$post_count++;
+			
+		endwhile; endif;
+	
+	    return $stories;
+    }
+	
+	/**
+	 * Display the map
+	 *
+	 * @param   $view   string  'admin' or 'public'
+	 * @param   $stories    WP_Query    containing our Stories and their meta
+	 * @param   $inactive   Array   [Optional] contains inactive grid items
+	 *
 	 * @return  $map_display    string  html to display map
 	 * @since   1.0.0
 	 */
-	public function cs_map_display( $view ) {
+	public function cs_get_map_display( $view, $stories, $inactive = array() ) {
+
 		if ( 'admin' === $view ) {
-			$map_display = '<div class="cs-map cs-admin-map">';
+			$map_display = '<div class="cs-map cs-admin-map"';
 		} else {
-			$map_display = '<div class="cs-map cs-public-map">';
+			$map_display = '<div class="cs-map cs-public-map"';
 		}
-		$map_display .= "<img src='".plugin_dir_url( dirname(__FILE__) ) . "img/map.png' />";
+		$map_display .= 'style="background-image: url(\'' .plugin_dir_url( dirname(__FILE__) ) . 'img/map.png\')" >';
+		
+		$count = 1;
+		while ($count <= (22*18)) {
+			$map_display .= '<div id="cs-map-item-'.$count.'" class="cs-map-item';
+			
+			if ( 'admin' === $view ) {
+				if ( is_array( $inactive['occupied'] ) && in_array( $count, $inactive['occupied'] ) ) {
+					$map_display .= ' cs-map-item__occupied';
+				} else if ( is_array( $inactive['neighbors'] ) && in_array( $count, $inactive['neighbors'] ) ) {
+					$map_display .= ' cs-map-item__inactive';
+				}
+			}
+			
+			
+			$map_display .= '" >';
+			
+			//Add Column and Row count for admin display
+			if ( 'admin' === $view ) {
+				if ( $count <= 22 ) {
+					$map_display .= '<span class="cs-admin-grid">' . $count . '</span>';
+				} else if ( 1 === $count % 22 ) {
+					$row = (int)($count / 22);
+					$map_display .= '<span class="cs-admin-grid">' . ++$row . '</span>';
+				}
+			} else {
+				if ( $stories->have_posts() ) : while ( $stories->have_posts() ) : $stories->the_post();
+					$story = get_post();
+					$location = (int) $story->meta['_c4h_cs_grid_number'][0];
+					$slug = $story->post_name;
+					if ($count === $location ) {
+						$map_display .= '<a class="cs-map-thumbnail" id=cs-map-item-'.$slug.'" href="#'.$slug.'">';
+						if ( has_post_thumbnail() ) {
+							$map_display .= get_the_post_thumbnail();
+						}
+						$map_display .= "</a>";
+					}
+				endwhile;
+				else :
+					$map_display .= "no stories";
+				endif;
+				
+			}
+			$map_display .= '</div>';
+			$count++;
+		}
 		$map_display .= "</div>";
 		return $map_display;
 	}
-    
+	
 }

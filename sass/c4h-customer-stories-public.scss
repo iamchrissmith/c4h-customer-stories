@@ -2,3 +2,138 @@
  * All of the CSS for your public-facing functionality should be
  * included in this file.
  */
+//@import 'https://fonts.googleapis.com/css?family=Amaranth:400,400i,700,700i';
+@import 'https://fonts.googleapis.com/css?family=Amaranth:400i';
+
+@import "global-styles";
+
+.cs-map {
+  height:694px;
+}
+
+.cs-map-item {
+  overflow:visible;
+}
+
+.cs-map-thumbnail {
+  height: 58px;
+  width: 58px;
+  min-width: 58px;
+  border-radius:50%;
+  border:2px solid white;
+  overflow:hidden;
+  text-align:center;
+  box-shadow: 1px 2.8px 4.9px 0.2px rgba(0, 0, 0, 0.5);
+  &:hover {
+    width: 97px;
+    min-width:97px;
+    height: 97px;
+    border: 4px solid rgb(237, 185, 40);
+    box-shadow: 2.7px 7.5px 8px rgba(0, 0, 0, 0.75);
+    z-index:9999;
+    cursor: pointer;
+  }
+}
+
+@media all and (max-width:700px) {
+  .cs-map {
+    display:none;
+  }
+  .cs-list-item {
+    background:white;
+    padding: 1.5em 2em;
+    width:100%;
+    clear:both;
+  }
+}
+@media all and (min-width:700px) {
+  .cs-list {
+    display:none;
+  }
+}
+
+.cs-list-text {
+  .cs-list-details {
+    display:block;
+    float:left;
+    width:33.333%;
+  }
+  .cs-list-story {
+    float:right;
+    display:block;
+    width:60%;
+  }
+}
+
+
+.cs-list-video p {
+  margin-bottom:0;
+}
+
+
+.cs-list-thumbnail {
+  position:relative;
+  quotes:"“" "”";
+  &:before {
+    position:absolute;
+    display:block;
+    top: -0.35em;
+    left: -0.15em;
+    content:open-quote;
+    font-size:179px;
+    color:rgb(235, 185, 41);
+  }
+  img {
+    border-radius: 50%;
+    overflow: hidden;
+  }
+}
+.cs-list-details {
+  color: rgb(73, 152, 214);
+  font-style: italic;
+  font-family: 'Amaranth', sans-serif;
+}
+.cs-list-title {
+  font-size: 36px;
+}
+
+.cs-list-location{
+  font-size: 18px;
+}
+
+.cs-list-story div.sharedaddy h3.sd-title {
+  display:none;
+}
+
+.cs-list-headline {
+  color: rgb(23, 117, 84);
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 26px;
+  margin-bottom:0.9em;
+}
+.cs-colorbox #cboxLoadedContent {
+  margin-bottom:0;
+}
+
+.cs-colorbox .cs-list-item {
+  padding: 2em 2.5em 0em;
+}
+
+.cs-colorbox #cboxContent{
+  box-shadow: 1px 2.8px 3px rgba(0, 0, 0, 0.5);
+}
+
+
+.cs-list-item button {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background-color: rgba(0, 0, 0, 0.25);
+  border-radius: 0;
+  text-shadow: none;
+  color: white;
+}
+
+
+

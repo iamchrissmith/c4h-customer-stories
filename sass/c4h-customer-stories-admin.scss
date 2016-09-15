@@ -3,10 +3,16 @@
  * included in this file.
  */
 
-.cs-admin-map img {
-    max-width: 80%;
-    margin: 0 auto;
-    display: block;
+@import "global-styles";
+
+.cs-admin-map {
+    height: calc(752px*694/932);
+  .cs-map-item__inactive {
+    background:rgba(0,0,0,0.3);
+  }
+  .cs-map-item__occupied {
+    background:rgba(255,255,255,0.3);
+  }
 }
 
 .cmb2-id--c4h-cs-grid .postbox .inside {
@@ -35,4 +41,11 @@
 .cmb2-id--c4h-cs-grid .cmb-group-title,
 .cmb2-id--c4h-cs-grid .cmbhandle {
     display:none;
+}
+
+.cs-map-item {
+  align-items: flex-start;
+  justify-content: flex-start;
+  border: 1px solid black;
+  box-sizing: border-box;
 }

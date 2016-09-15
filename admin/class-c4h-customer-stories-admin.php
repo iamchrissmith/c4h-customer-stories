@@ -22,24 +22,18 @@
  */
 class C4h_Customer_Stories_Admin extends C4h_Customer_Stories
 {
-
+	
 	/**
-	 * The ID of this plugin.
+	 * Inactive grid items
 	 *
 	 * @since    1.0.0
-	 * @access   private
-	 * @var      string    $plugin_name    The ID of this plugin.
+	 * @access   public
+	 * @var      array  $inactive  array of inactive grid locations
 	 */
-//	private $plugin_name;
-
-	/**
-	 * The version of this plugin.
-	 *
-	 * @since    1.0.0
-	 * @access   private
-	 * @var      string    $version    The current version of this plugin.
-	 */
-//	private $version;
+	public $inactive = array(
+		'occupied' => '',
+		'neighbors' => ''
+	);
 
 	/**
 	 * Initialize the class and set its properties.
@@ -74,7 +68,7 @@ class C4h_Customer_Stories_Admin extends C4h_Customer_Stories
 		 * class.
 		 */
 
-		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/c4h-customer-stories-admin.css', array(), $this->version, 'all' );
+		wp_enqueue_style( $this->plugin_name, plugins_url( 'css/c4h-customer-stories-admin.css', __DIR__ ), array(), $this->version, 'all' );
 
 	}
 
@@ -178,16 +172,17 @@ class C4h_Customer_Stories_Admin extends C4h_Customer_Stories
 			'id'            => $prefix . 'metabox',
 			'title'         => esc_html__( 'Customer Story Information', 'c4h-customer-stories' ),
 			'object_types'  => array( 'customer-story', ), // Post type
-			// 'show_on_cb' => 'yourprefix_show_if_front_page', // function should return a bool value
 			 'context'    => 'normal',
 			 'priority'   => 'high',
-			// 'show_names' => true, // Show field names on the left
-			// 'cmb_styles' => false, // false to disable the CMB stylesheet
-			// 'closed'     => true, // true to keep the metabox closed by default
-			// 'classes'    => 'extra-class', // Extra cmb2-wrap classes
-			// 'classes_cb' => 'yourprefix_add_some_classes', // Add classes through a callback.
 		) );
-
+		
+		$cs_meta->add_field( array(
+			'name'       => esc_html__( 'Story Video?', 'cmb2' ),
+			'desc'       => esc_html__( 'check if this is a video story', 'c4h-customer-stories' ),
+			'id'         => $prefix . 'video',
+			'type'       => 'checkbox',
+		) );
+		
 		$cs_meta->add_field( array(
 			'name'       => esc_html__( 'Story Title', 'cmb2' ),
 			'desc'       => esc_html__( 'text to appear at the top of the story', 'c4h-customer-stories' ),
@@ -204,7 +199,7 @@ class C4h_Customer_Stories_Admin extends C4h_Customer_Stories
 		$grid_group = $cs_meta->add_field( array(
 			'id'           => $prefix . 'grid',
 			'type'         => 'group',
-			'before_group' => $this->cs_map_display( 'admin' ),
+			'before_group' => $this->cs_map_admin_display(),
 			'repeatable'  => false,
 			'description'  => esc_html__( 'Determine the layout location of your story', 'c4h-customer-stories' ),
 		) );
@@ -216,7 +211,7 @@ class C4h_Customer_Stories_Admin extends C4h_Customer_Stories
 			'type'             => 'select',
 			'show_option_none' => true,
 			'options_cb'       => 'C4h_Customer_Stories_Admin::cs_select_populate',
-			'classes'          => 'cmb-row-half_column cmb-row-half_column_first',
+			'classes'          => 'cmb-row-half_column cmb-row-half_column_first cs-location cs-location-row',
 		) );
 
 		$cs_meta->add_group_field( $grid_group, array(
@@ -226,8 +221,81 @@ class C4h_Customer_Stories_Admin extends C4h_Customer_Stories
 			'type'             => 'select',
 			'show_option_none' => true,
 			'options_cb'          => 'C4h_Customer_Stories_Admin::cs_select_populate',
-			'classes'          => 'cmb-row-half_column cmb-row-half_column_first',
+			'classes'          => 'cmb-row-half_column cmb-row-half_column_first cs-location cs-location-column',
 		) );
+		$cs_meta->add_field( array(
+			'id'         => $prefix . 'grid_number',
+			'type'       => 'hidden',
+		) );
+	}
+	
+	/**
+	 * Calculate an occupied location's neighbors and set them in our class variable $inactive.
+	 *
+	 * @param $location integer Grid number of the story's location
+	 *
+	 */
+	public function get_neighbors( $location ) {
+		
+		if ( $location - 22 > 0 ){
+			$this->inactive['neighbors'][] = $location-22;
+		}
+		
+		if ( $location + 22 > 0 ){
+			$this->inactive['neighbors'][] = $location+22;
+		}
+		
+		if ( ($location + 1)%22 !== 0 ){
+			$this->inactive['neighbors'][] = $location+1;
+		}
+		
+		if ( ($location - 1)%22 !== 0 ){
+			$this->inactive['neighbors'][] = $location-1;
+		}
+		
+	}
+	
+	/**
+	 * Populate $inactive variable with occupied and neighbor grids
+	 *
+	 * @param $stories
+	 *
+	 */
+	public function set_inactive( $stories ) {
+		
+		if ( $stories->have_posts() ) : while ( $stories->have_posts() ) : $stories->the_post();
+			
+			$post = get_post();
+			$location = $post->meta['_c4h_cs_grid_number'][0];
+			$this->get_neighbors( $location );
+			$this->inactive['occupied'][] =  $location;
+
+		endwhile; endif;
+		
+		
+	}
+	
+	/**
+	 * Return $inactive
+	 *
+	 * @return  $inactive
+	 *
+	 */
+	public function get_inactive() {
+		
+		return $this->inactive;
+		
+	}
+	
+	public function cs_map_admin_display() {
+		
+		$stories = $this->get_stories();
+		
+		$this->set_inactive( $stories );
+		
+		$map = $this->cs_get_map_display( 'admin', $stories, $this->inactive );
+			
+		return $map;
 	}
 
 	/**
@@ -237,6 +305,7 @@ class C4h_Customer_Stories_Admin extends C4h_Customer_Stories
 	 * @since   1.0.0
 	 */
 	public static function cs_select_populate( $field ) {
+		
 		if ( esc_html__( 'Grid - column', 'c4h-customer-stories' ) === $field->args['name'] ){
 			$max = 22;
 		} else if ( esc_html__( 'Grid - row', 'c4h-customer-stories' ) === $field->args['name'] ) {
@@ -245,7 +314,8 @@ class C4h_Customer_Stories_Admin extends C4h_Customer_Stories
 			$max = 0;
 		}
 		$options = array();
-		for ( $i = 0; $i < $max; $i++ ) {
+		for ( $i = 1; $i <= $max; $i++ ) {
+			
 			$options[ $i ] = $i;
 		}
 		return $options;
