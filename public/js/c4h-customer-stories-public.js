@@ -29,6 +29,30 @@
 	 * practising this, we should strive to set a better example in our own work.
 	 */
 
+    // Show customer story colorbox when hashtag anchor is added to url manually in browser
+    function showCustomerStory() {
+        // Get hash to identify which customer story
+        var storyHash = window.location.hash;
+
+        var path = window.location.pathname;
+        var verifyDirectory = path.lastIndexOf( 'customer-stories' );
+        // Check to see if we are in the right directory and if we have a hash entered by user
+        if ( verifyDirectory !== -1 && storyHash !== '' ) {
+            // Check to see if it is a valid customer story by checking if customer storyexists
+            if ( $( storyHash ).hasClass( 'cs-list-item' ) ) {
+                //todo: if mobile scroll to story,
+
+                // else run colorbox
+                $("#customer-stories").get(0).scrollIntoView();
+                // document.getElementById('elementID').scrollIntoView()
+
+                // If so, show the colorbox
+                $.colorbox( { inline: true, width: "75%", href: storyHash } );
+            }
+
+        } 
+    }
+
 	$( window ).load(function() {
         $(".cs-map-thumbnail").colorbox({
             inline:true,
@@ -42,6 +66,11 @@
         $('.cs-list-item .cboxClose').on('click', function() {
             $.colorbox.close();
         });
+
+        showCustomerStory();
+
+
+
     });
 
 })( jQuery );

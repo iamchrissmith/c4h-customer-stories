@@ -260,9 +260,9 @@ class C4h_Customer_Stories {
 	public function cs_get_map_display( $view, $stories, $inactive = array() ) {
 
 		if ( 'admin' === $view ) {
-			$map_display = '<div class="cs-map cs-admin-map"';
+			$map_display = '<div id="customer-stories" class="cs-map cs-admin-map"';
 		} else {
-			$map_display = '<div class="cs-map cs-public-map"';
+			$map_display = '<div id="customer-stories" class="cs-map cs-public-map"';
 		}
 		$map_display .= 'style="background-image: url(\'' .plugin_dir_url( dirname(__FILE__) ) . 'img/map.png\')" >';
 		
