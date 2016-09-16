@@ -59,7 +59,7 @@
     z-index: 9999;
     cursor: pointer; }
 
-@media all and (max-width: 700px) {
+@media all and (max-width: 940px) {
   .cs-map {
     display: none; }
   .cs-list-item {
@@ -68,7 +68,7 @@
     width: 100%;
     clear: both; } }
 
-@media all and (min-width: 700px) {
+@media all and (min-width: 940px) {
   .cs-list {
     display: none; } }
 
@@ -114,7 +114,7 @@
 .cs-list-story div.sharedaddy h3.sd-title {
   display: none; }
 
-.cs-list-headline {
+.cs-list-item .cs-list-headline h2 {
   color: #177554;
   font-size: 24px;
   font-weight: 700;
