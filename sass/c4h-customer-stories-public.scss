@@ -65,10 +65,15 @@
   }
 }
 
-
-.cs-list-video p {
-  margin-bottom:0;
+.cs-list-item p {
+  margin-bottom:1em;
+  :last-of-type {
+    margin-bottom:0;
+  }
 }
+//.cs-list-video p {
+//  margin-bottom:0;
+//}
 
 
 .cs-list-thumbnail {
@@ -95,6 +100,7 @@
 }
 .cs-list-title {
   font-size: 36px;
+  line-height:0.9em;
 }
 
 .cs-list-location{
@@ -133,6 +139,7 @@
   border-radius: 0;
   text-shadow: none;
   color: white;
+  padding: 0.7em 0.7em 0.35em;
 }
 
 

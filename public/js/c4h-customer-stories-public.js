@@ -50,7 +50,7 @@
                 $.colorbox( { inline: true, width: "75%", href: storyHash } );
             }
 
-        } 
+        }
     }
 
 	$( window ).load(function() {
