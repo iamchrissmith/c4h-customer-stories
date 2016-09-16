@@ -202,6 +202,11 @@ class C4h_Customer_Stories_Admin extends C4h_Customer_Stories
 			'before_group' => $this->cs_map_admin_display(),
 			'repeatable'  => false,
 			'description'  => esc_html__( 'Determine the layout location of your story', 'c4h-customer-stories' ),
+			'column' => array(
+				'position' => 5,
+				'name'     => 'Position',
+			),
+			'display_cb' => 'C4h_Customer_Stories_Admin::cs_column_display_cb'
 		) );
 
 		$cs_meta->add_group_field( $grid_group, array(
@@ -319,6 +324,25 @@ class C4h_Customer_Stories_Admin extends C4h_Customer_Stories
 			$options[ $i ] = $i;
 		}
 		return $options;
+	}
+	
+	/**
+	 * Manually render a field column display.
+	 *
+	 * @param  array      $field_args Array of field arguments.
+	 * @param  CMB2_Field $field      The field object
+	 */
+	public static function cs_column_display_cb( $field_args, $field ) {
+		?>
+		<div class="custom-column-display <?php echo $field->row_classes(); ?>">
+			<?php
+			$values = $field->value;
+			$row = $values[0]['grid_row_select'];
+			$column = $values[0]['grid_column_select'];
+			?>
+			<p>Row: <?php echo $row; ?> || Column: <?php echo $column; ?> </p>
+		</div>
+		<?php
 	}
 
 }
