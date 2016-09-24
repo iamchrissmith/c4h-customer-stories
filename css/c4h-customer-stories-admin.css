@@ -35,10 +35,17 @@
 
 .cs-admin-map {
   height: calc(752px*694/932); }
+  .cs-admin-map .cs-map-item:hover {
+    cursor: pointer;
+    background: rgba(255, 255, 255, 0.1); }
   .cs-admin-map .cs-map-item__inactive {
     background: rgba(0, 0, 0, 0.3); }
+    .cs-admin-map .cs-map-item__inactive:hover {
+      background: rgba(255, 0, 0, 0.4); }
   .cs-admin-map .cs-map-item__occupied {
     background: rgba(255, 255, 255, 0.3); }
+    .cs-admin-map .cs-map-item__occupied:hover {
+      background: rgba(255, 0, 0, 0.6); }
 
 .cmb2-id--c4h-cs-grid .postbox .inside {
   display: -ms-flexbox;

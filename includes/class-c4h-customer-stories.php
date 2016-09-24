@@ -268,7 +268,8 @@ class C4h_Customer_Stories {
 		
 		$count = 1;
 		while ($count <= (22*18)) {
-			$map_display .= '<div id="cs-map-item-'.$count.'" class="cs-map-item';
+			$map_display .= '<div id="cs-map-item-'.$count.'" data-cs_location ="'.$count.'" class="cs-map-item';
+			//todo: add current item indicator
 			
 			if ( 'admin' === $view ) {
 				if ( is_array( $inactive['occupied'] ) && in_array( $count, $inactive['occupied'] ) ) {
@@ -282,14 +283,14 @@ class C4h_Customer_Stories {
 			$map_display .= '" >';
 			
 			//Add Column and Row count for admin display
-			if ( 'admin' === $view ) {
-				if ( $count <= 22 ) {
-					$map_display .= '<span class="cs-admin-grid">' . $count . '</span>';
-				} else if ( 1 === $count % 22 ) {
-					$row = (int)($count / 22);
-					$map_display .= '<span class="cs-admin-grid">' . ++$row . '</span>';
-				}
-			} else {
+			if ( 'admin' !== $view ) {
+//				if ( $count <= 22 ) {
+//					$map_display .= '<span class="cs-admin-grid">' . $count . '</span>';
+//				} else if ( 1 === $count % 22 ) {
+//					$row = (int)($count / 22);
+//					$map_display .= '<span class="cs-admin-grid">' . ++$row . '</span>';
+//				}
+//			} else {
 				if ( $stories->have_posts() ) : while ( $stories->have_posts() ) : $stories->the_post();
 					$story = get_post();
 					$location = (int) $story->meta['_c4h_cs_grid_number'][0];
