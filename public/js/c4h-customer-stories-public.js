@@ -29,6 +29,16 @@
 	 * practising this, we should strive to set a better example in our own work.
 	 */
 
+	var cbArgs = {
+        inline:true,
+        width:"75%",
+        opacity:"0",
+        closeButton:false,
+        className: "cs-colorbox",
+        scrolling:false,
+        maxWidth:'745px'
+    };
+
     // Show customer story colorbox when hashtag anchor is added to url manually in browser
     function showCustomerStory() {
         // Get hash to identify which customer story
@@ -47,23 +57,23 @@
                 // document.getElementById('elementID').scrollIntoView()
 
                 // If so, show the colorbox
-                $.colorbox( { inline: true, width: "75%", href: storyHash } );
+                cbArgs.href = storyHash;
+                console.log(cbArgs);
+                $.colorbox( cbArgs );
             }
 
         }
     }
 
 	$( window ).load(function() {
-        $(".cs-map-thumbnail").colorbox({
-            inline:true,
-            width:"75%",
-            opacity:"0",
-            closeButton:false,
-            className: "cs-colorbox",
-            scrolling:false,
-            maxWidth:'745px'
-        });
+	    cbArgs.onComplete = function(){
+	        var hash = $(this).attr('href');
+            window.location.hash = hash;
+
+        };
+        $(".cs-map-thumbnail").colorbox( cbArgs );
         $('.cs-list-item .cboxClose').on('click', function() {
+            window.location.hash = '';
             $.colorbox.close();
         });
 
