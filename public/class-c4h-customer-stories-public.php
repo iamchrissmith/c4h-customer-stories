@@ -94,6 +94,12 @@ class C4h_Customer_Stories_Public extends C4h_Customer_Stories
 			$story = get_post();
 			$story_id = $story->ID;
 			$slug = $story->post_name;
+			if ( get_post_meta($story_id, '_c4h_cs_story_position') ) {
+				$position = get_post_meta($story_id, '_c4h_cs_story_position');
+				$position = $position[0];
+			} else {
+				$position = '';
+			}
 			if ( get_post_meta($story_id, '_c4h_cs_story_location') ) {
 				$location = get_post_meta($story_id, '_c4h_cs_story_location');
 				$location = $location[0];
@@ -123,6 +129,7 @@ class C4h_Customer_Stories_Public extends C4h_Customer_Stories
 						<div class="cs-list-details">
 							<div class="cs-list-thumbnail">'.get_the_post_thumbnail().'</div>
 							<div class="cs-list-title">'.get_the_title().'</div>
+							<div class="cs-list-position">'.$position.'</div>
 							<div class="cs-list-location">'.$location.'</div>
 						</div>
 						<div class="cs-list-story">

@@ -184,15 +184,20 @@ class C4h_Customer_Stories_Admin extends C4h_Customer_Stories
 		) );
 		
 		$cs_meta->add_field( array(
-			'name'       => esc_html__( 'Story Title', 'cmb2' ),
-			'desc'       => esc_html__( 'text to appear at the top of the story', 'c4h-customer-stories' ),
-			'id'         => $prefix . 'story_title',
+			'name'       => esc_html__( 'Person\'s Position', 'cmb2' ),
+			'id'         => $prefix . 'story_position',
 			'type'       => 'text',
 		) );
 		$cs_meta->add_field( array(
 			'name'       => esc_html__( 'Location', 'cmb2' ),
 			'desc'       => esc_html__( 'location to appear on the story', 'c4h-customer-stories' ),
 			'id'         => $prefix . 'story_location',
+			'type'       => 'text',
+		) );
+		$cs_meta->add_field( array(
+			'name'       => esc_html__( 'Story Title', 'cmb2' ),
+			'desc'       => esc_html__( 'text to appear at the top of the story', 'c4h-customer-stories' ),
+			'id'         => $prefix . 'story_title',
 			'type'       => 'text',
 		) );
 

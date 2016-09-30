@@ -111,6 +111,11 @@
   font-size: 36px;
   line-height: 0.9em; }
 
+.cs-list-position {
+  font-size: 18px;
+  color: #7f7f7f;
+  font-style: normal; }
+
 .cs-list-location {
   font-size: 18px; }
 
