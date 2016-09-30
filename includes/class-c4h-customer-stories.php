@@ -74,6 +74,8 @@ class C4h_Customer_Stories {
         $this->set_locale();
         $this->define_admin_hooks();
         $this->define_public_hooks();
+	    
+	    add_image_size('customer-story-thumb', 97,97,true);
         
     }
     
@@ -298,7 +300,7 @@ class C4h_Customer_Stories {
 					if ($count === $location ) {
 						$map_display .= '<a class="cs-map-thumbnail" id=cs-map-item-'.$slug.'" href="#'.$slug.'">';
 						if ( has_post_thumbnail() ) {
-							$map_display .= get_the_post_thumbnail();
+							$map_display .= get_the_post_thumbnail($story->ID, 'customer-story-thumb');
 						}
 						$map_display .= "</a>";
 					}

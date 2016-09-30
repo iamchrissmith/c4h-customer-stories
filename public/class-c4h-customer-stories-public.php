@@ -79,7 +79,8 @@ class C4h_Customer_Stories_Public extends C4h_Customer_Stories
 		 * class.
 		 */
 
-		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/c4h-customer-stories-public.js', array( 'jquery' ), $this->version, false );
+		wp_enqueue_script( 'colorbox', plugin_dir_url( __FILE__ ) . 'js/jquery.colorbox-min.js', array( 'jquery' ), $this->version, false );
+		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/c4h-customer-stories-public.js', array( 'jquery', 'colorbox' ), $this->version, false );
 
 	}
 	

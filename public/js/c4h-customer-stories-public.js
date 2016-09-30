@@ -58,7 +58,7 @@
 
                 // If so, show the colorbox
                 cbArgs.href = storyHash;
-                console.log(cbArgs);
+                console.log("CB args", cbArgs);
                 $.colorbox( cbArgs );
             }
 
@@ -68,7 +68,10 @@
 	$( window ).load(function() {
 	    cbArgs.onComplete = function(){
 	        var hash = $(this).attr('href');
-            window.location.hash = hash;
+            if ( hash ) {
+                window.location.hash = hash;
+            }
+
 
         };
         $(".cs-map-thumbnail").colorbox( cbArgs );
