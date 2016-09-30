@@ -139,6 +139,11 @@ class C4h_Customer_Stories_Public extends C4h_Customer_Stories
 				$list .= '
 					<div class="cs-list-item cs-list-video clearfix" id="'.$slug.'">
 						<button type="button" class="cboxClose">X</button>
+						<div class="cs-list-details cs-list-video-details">
+							<div class="cs-list-title">'.get_the_title().'</div>
+							<div class="cs-list-location">'.$location.'</div>
+							<div class="cs-list-position">'.$position.'</div>
+						</div>
 						<div class="cs-list-story">
 							<div class="cs-list-content">'.$content.'</div>';
 			}

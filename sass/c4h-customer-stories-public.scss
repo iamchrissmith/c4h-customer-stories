@@ -113,10 +113,6 @@
   font-size: 18px;
 }
 
-.cs-list-story div.sharedaddy h3.sd-title {
-  display:none;
-}
-
 .cs-list-item .cs-list-headline h2 {
   color: rgb(23, 117, 84);
   font-size: 24px;
@@ -148,5 +144,17 @@
   padding: 0.7em 0.7em 0.35em;
 }
 
+.cs-list-video-details {
+  .cs-list-title, .cs-list-location {
+    display:inline-block;
+    margin-right: 0.25em;
+  }
+  .cs-list-position {
+    margin-top:0.25em;
+  }
+}
 
+.cs-list-video .cs-list-story {
+  margin-top:0.75em;
+}
 
