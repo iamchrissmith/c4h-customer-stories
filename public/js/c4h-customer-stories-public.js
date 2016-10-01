@@ -1,34 +1,6 @@
 (function( $ ) {
 	'use strict';
 
-	/**
-	 * All of the code for your public-facing JavaScript source
-	 * should reside in this file.
-	 *
-	 * Note: It has been assumed you will write jQuery code here, so the
-	 * $ function reference has been prepared for usage within the scope
-	 * of this function.
-	 *
-	 * This enables you to define handlers, for when the DOM is ready:
-	 *
-	 * $(function() {
-	 *
-	 * });
-	 *
-	 * When the window is loaded:
-	 *
-	 * $( window ).load(function() {
-	 *
-	 * });
-	 *
-	 * ...and/or other possibilities.
-	 *
-	 * Ideally, it is not considered best practise to attach more than a
-	 * single DOM-ready or window-load handler for a particular page.
-	 * Although scripts in the WordPress core, Plugins and Themes may be
-	 * practising this, we should strive to set a better example in our own work.
-	 */
-
 	var cbArgs = {
         inline:true,
         width:"75%",
@@ -40,7 +12,7 @@
     };
 
     // Show customer story colorbox when hashtag anchor is added to url manually in browser
-    function showCustomerStory() {
+    var showCustomerStory = function() {
         // Get hash to identify which customer story
         var storyHash = window.location.hash;
 
@@ -53,30 +25,27 @@
                 //todo: if mobile scroll to story,
 
                 // else run colorbox
-                $("#customer-stories").get(0).scrollIntoView();
-                // document.getElementById('elementID').scrollIntoView()
 
-                // If so, show the colorbox
+
+                // console.log(storyHash);
                 cbArgs.href = storyHash;
-                console.log("CB args", cbArgs);
+                // console.log("CB args", cbArgs);
                 $.colorbox( cbArgs );
             }
 
         }
-    }
+    };
 
 	$( window ).load(function() {
 	    cbArgs.onComplete = function(){
 	        var hash = $(this).attr('href');
             if ( hash ) {
-                window.location.hash = hash;
+                history.replaceState(undefined,undefined, hash);
             }
-
-
         };
         $(".cs-map-thumbnail").colorbox( cbArgs );
         $('.cs-list-item .cboxClose').on('click', function() {
-            window.location.hash = '';
+            history.replaceState(undefined,undefined, " ");
             $.colorbox.close();
         });
 
