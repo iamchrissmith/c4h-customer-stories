@@ -1,4 +1,3 @@
-@charset "UTF-8";
 /**
  * All of the CSS for your public-facing functionality should be
  * included in this file.
@@ -49,7 +48,8 @@
   border: 2px solid white;
   overflow: hidden;
   text-align: center;
-  box-shadow: 1px 2.8px 4.9px 0.2px rgba(0, 0, 0, 0.5); }
+  box-shadow: 1px 2.8px 4.9px 0.2px rgba(0, 0, 0, 0.5);
+  transition: all 0.25s; }
   .cs-map-thumbnail:hover {
     width: 97px;
     min-width: 97px;
@@ -88,16 +88,17 @@
     margin-bottom: 0; }
 
 .cs-list-thumbnail {
-  position: relative;
-  quotes: "“" "”"; }
+  position: relative; }
   .cs-list-thumbnail:before {
     position: absolute;
     display: block;
-    top: -0.35em;
-    left: -0.15em;
-    content: open-quote;
-    font-size: 179px;
-    color: #ebb929; }
+    top: -1.5em;
+    left: -0.5em;
+    content: '';
+    color: #ebb929;
+    background: url(../img/cs-quote.png);
+    width: 73px;
+    height: 53px; }
   .cs-list-thumbnail img {
     border-radius: 50%;
     overflow: hidden; }
@@ -105,7 +106,8 @@
 .cs-list-details {
   color: #4998d6;
   font-style: italic;
-  font-family: 'Amaranth', sans-serif; }
+  font-family: 'Amaranth', sans-serif;
+  padding-top: 25px; }
 
 .cs-list-title {
   font-size: 36px;
