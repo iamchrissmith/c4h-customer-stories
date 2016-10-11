@@ -98,12 +98,13 @@
 .cs-list-details {
   color: rgb(73, 152, 214);
   font-style: italic;
-  font-family: 'Amaranth', sans-serif;
   padding-top:25px;
 }
 .cs-list-title {
   font-size: 36px;
   line-height:0.9em;
+  font-family: 'Amaranth', sans-serif;
+  margin-bottom:0.1em;
 }
 
 .cs-list-position{
@@ -114,6 +115,7 @@
 
 .cs-list-location{
   font-size: 18px;
+  font-family: 'Amaranth', sans-serif;
 }
 
 .cs-list-story div.sharedaddy h3.sd-title {
@@ -133,7 +135,7 @@
 }
 
 .cs-colorbox .cs-list-item {
-  padding: 2em 2.5em 0em;
+  padding: 2em 2.5em;
 }
 
 .cs-colorbox #cboxContent{

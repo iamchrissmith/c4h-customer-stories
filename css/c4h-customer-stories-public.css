@@ -106,12 +106,13 @@
 .cs-list-details {
   color: #4998d6;
   font-style: italic;
-  font-family: 'Amaranth', sans-serif;
   padding-top: 25px; }
 
 .cs-list-title {
   font-size: 36px;
-  line-height: 0.9em; }
+  line-height: 0.9em;
+  font-family: 'Amaranth', sans-serif;
+  margin-bottom: 0.1em; }
 
 .cs-list-position {
   font-size: 18px;
@@ -119,7 +120,8 @@
   font-style: normal; }
 
 .cs-list-location {
-  font-size: 18px; }
+  font-size: 18px;
+  font-family: 'Amaranth', sans-serif; }
 
 .cs-list-story div.sharedaddy h3.sd-title {
   color: #186463;
@@ -136,7 +138,7 @@
   margin-bottom: 0; }
 
 .cs-colorbox .cs-list-item {
-  padding: 2em 2.5em 0em; }
+  padding: 2em 2.5em; }
 
 .cs-colorbox #cboxContent {
   box-shadow: 1px 2.8px 3px rgba(0, 0, 0, 0.5); }
